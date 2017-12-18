@@ -13,6 +13,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
-  "license": "ISC"
+  "contributors": [{ "name" : "Anna-Katharina Rausch"
+    , "email" : "annakatharinarausch@gmail.com"
+    },
+    { "name" : "Finn Malte Hinrichsen"
+    , "email" : "fm.hinrichsen@gmail.com"
+    }],
+  "repository" :
+  { "type" : "git"
+  , "url" : "https://gitlab.com/datatrain/datatrain-webapp"
+  },    
+  "license": "see README.md"
 }

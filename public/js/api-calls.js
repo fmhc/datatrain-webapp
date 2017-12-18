@@ -358,8 +358,8 @@ function getData(theUrl, p1 = 0, p2 = 0, p3 = 0, p4 = 0) {
 
 	for (var i = 1, j = arguments.length; i < j; i++){
         parameters.push(arguments[i]);
-        console.log(parameters);
     }
+    console.log(parameters);
 
     if (theUrl.includes("systems")) {
     	var params = JSON.stringify({operatorId:parseInt(parameters[0]), pcType:parseInt(parameters[1]), modelType:parseInt(parameters[2]), vehicleType:parseInt(parameters[3])});
@@ -405,7 +405,7 @@ $.get("/data", function(data){
         var response = data;
         for (var i = 0, j = response.length; i < j; i++) {
             var obj = response[0]['properties'];
-            console.log(obj);
+            //console.log(obj);
             for (var key in obj) {
                 console.log("label: " + obj[key]['label'] + "   value:  " + obj[key]['value'] + "   unit:  " + obj[key]['unit']);
             }
@@ -448,6 +448,7 @@ $.get("/data", function(data){
             $('#doorFailure').html(" Störung der Tür");
         }
 
+        var updatetime = response[0]['time'];
         $('#temperatureOutside').html(response[0]['properties']['temperatureOutside']['value'] + " " + response[0]['properties']['temperatureOutside']['unit']);
         $('#temperatureOutsideLabel').html(response[0]['properties']['temperatureOutside']['label']);
         $('#temperatureWE2').html(response[0]['properties']['temperatureWE2']['value'] + " " + response[0]['properties']['temperatureWE2']['unit']);
@@ -460,12 +461,7 @@ $.get("/data", function(data){
         $('#temperatureS1Label').html(response[0]['properties']['temperatureS1']['label']);        
         $('#temperatureH5').html(response[0]['properties']['temperatureH5']['value'] + " " + response[0]['properties']['temperatureH5']['unit']);
         $('#temperatureH5Label').html(response[0]['properties']['temperatureH5']['label']);        
-
-
-
-
-
-
+        $('#notifications').append('<a href="#" class="list-group-item"><i class="fa fa-tasks fa-fw"></i>Neue Daten geladen<span class="pull-right text-muted small"><em>moment(Date.now()).fromNow();</em></span></a>');
 
         console.log(response);
     })

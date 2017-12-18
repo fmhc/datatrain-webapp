@@ -1,17 +1,14 @@
-http = require('http');
-
+var http = require('http');
 var express = require('express');
 var app = express();
 
 app.get('/', function (req, res) {
+   res.sendFile(__dirname + "/public/index.html" );
+})
+
+app.get('/results', function (req, res) {
    res.sendFile(__dirname + "/public/results.html" );
 })
-
-app.get('/dashboard', function (req, res) {
-   res.sendFile(__dirname + "/public/newindex.html" );
-})
-
-
 
 app.get('/data', function (req, res) {
 	var url = getData(sensorsUrl, "00:c0:3a:b1:d4:30", "1", "1510541862", "1513374276");
@@ -24,7 +21,7 @@ app.get('/data', function (req, res) {
 			var response = JSON.parse(body);
 			res.json(response);
 		})
-})
+  })
 })
 
 app.use(function(req, res, next) {
@@ -34,9 +31,6 @@ app.use(function(req, res, next) {
 
 app.use(express.static('public'));
 
-app.get('/index.html', function (req, res) {
-   res.sendFile( __dirname + "/" + "results.html" );
-})
 
 sensorsUrl = "http://hackathon.colibri-labs.de/api/db/1/sensors.json";
 
@@ -45,7 +39,7 @@ function getData(theUrl, p1 = 0, p2 = 0, p3 = 0, p4 = 0) {
 
 	for (var i = 1, j = arguments.length; i < j; i++){
         parameters.push(arguments[i]);
-        console.log(parameters);
+        //console.log(parameters);
     }
 
     if (theUrl.includes("systems")) {
@@ -68,9 +62,7 @@ function getData(theUrl, p1 = 0, p2 = 0, p3 = 0, p4 = 0) {
 
 
 var server = app.listen(8080, function () {
-   var host = server.address().address
    var port = server.address().port
-   
-   console.log("Example app listening at http://%s:%s", host, port)
+   console.log("DataTrain Colibri-W ICE Dashboard")
+   console.log("Webserver listening at http://localhost:%s", port)
 })
-
